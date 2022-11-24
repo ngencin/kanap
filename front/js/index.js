@@ -1,46 +1,41 @@
 // API products
+function getProduct(products){ // création de la fonction qui appelle l'affichage des produits
+                
+                    for (let product of products){ // Création d'une boucle d'un produit de mon tableau des produits
+                        // Récupération lien produit
+                        let createLink = document.createElement("a") // élement lien
+                        createLink.href = `./product.html?_id=${product._id}` // adresse url qui contient l'id
+                        document.querySelector('#items').appendChild(createLink)
+                       
 
-/*fetch("http://localhost:3000/api/products") // requête récupérer les données 
+
+                        // Récupération section article
+                        let createArticle = document.createElement("article") // création balise article
+                        createLink.appendChild(createArticle)
+                      
+                        // Récupération image
+                        let createImg = document.createElement("img") // création élément img 
+                        let img = createArticle.appendChild(createImg) 
+                        img.src = `${product.imageUrl}` // appel du lien de l'image
+                        img.alt =  `${product.altTxt}` // appel de la description de l'image
+                        // img.alt = product.altTxt + " test "
+
+                        // Récupération h3
+                        let createH3 = document.createElement("h3") // création du H3
+                        let h3 = createArticle.appendChild(createH3)
+                        h3.innerHTML = `${product.name}` // appel du h3 pour chaque produits
+                        
+
+                        // Récupération p
+                        let createDescription = document.createElement("p") // création de la description
+                        let description = createArticle.appendChild(createDescription)
+                        description.innerHTML = `${product.description}` // appel de la description pour chaque produits
+                    }
+
+            }
+let productsJson = fetch("http://localhost:3000/api/products") // requête récupérer les données 
     .then(function(res){
         return res.json() // résultat requête format json
-  }).then(function(value){
-        console.log(value); // affichage produits
-});*/
-
-async function getProducts(){
-   const response = await fetch("http://localhost:3000/api/products")
-    const responseJson = await response.json()
-   
-   
-    // Array Json
-
-let valeur = responseJson[0].imageUrl // récupère valeur du array Json
-
-
-// Products
-
-// Récupération lien produit
-let createLink = document.createElement("a") // élement lien
-createLink.href = "./product.html?id=42" // adresse url
-createLink.text='Kanap'
-let link = document.querySelector('#items').appendChild(createLink) // element parent items , enfant de cet élement article
-
-
-// Récupération section article
-let createArticle = document.createElement("article") // création balise article
-let article = createLink.appendChild(createArticle) // balise article enfant de cardArticle
-
-
-// Récupération image
-let createImg = document.createElement("img") // création élément img 
-createImg.text = "Kanap Sinopé" 
-let img = createArticle.appendChild(createImg) 
-img.src = valeur    // appel de l'image via array json
-
-
-// Récupération h3
-let createH3 = document.createElement("h3")
-let h3 = createArticle.appendChild(createH3)
-}
-getProducts().then()
-
+    }).then((products) => { // appel des produits
+        getProduct(products) // appel de la fonction qui permet l'affichage des produits, qui permet d'éviter undefined pour les variables
+});                       
