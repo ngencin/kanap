@@ -35,5 +35,4 @@ let productsJson = fetch(`http://localhost:3000/api/products/${productID}`) // u
     }
 
     // Localstorage
-    localStorage.setItem['itemQuantity', 'colors'];
-    console.log(localStorage)
+  
