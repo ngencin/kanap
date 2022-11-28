@@ -32,7 +32,7 @@ function getProduct(products){ // création de la fonction qui appelle l'afficha
                         description.innerHTML = `${product.description}` // appel de la description pour chaque produits
                     }
 
-            }
+}
 let productsJson = fetch("http://localhost:3000/api/products") // requête récupérer les données 
     .then(function(res){
         return res.json() // résultat requête format json
