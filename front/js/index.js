@@ -6,13 +6,11 @@ function getProduct(products){ // création de la fonction qui appelle l'afficha
                         let createLink = document.createElement("a") // élement lien
                         createLink.href = `./product.html?_id=${product._id}` // adresse url qui contient l'id
                         document.querySelector('#items').appendChild(createLink)
-                       
-
-
+                        
                         // Récupération section article
                         let createArticle = document.createElement("article") // création balise article
                         createLink.appendChild(createArticle)
-                      
+                        
                         // Récupération image
                         let createImg = document.createElement("img") // création élément img 
                         let img = createArticle.appendChild(createImg) 
@@ -25,7 +23,6 @@ function getProduct(products){ // création de la fonction qui appelle l'afficha
                         let h3 = createArticle.appendChild(createH3)
                         h3.innerHTML = `${product.name}` // appel du h3 pour chaque produits
                         
-
                         // Récupération p
                         let createDescription = document.createElement("p") // création de la description
                         let description = createArticle.appendChild(createDescription)
