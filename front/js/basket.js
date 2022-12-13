@@ -14,7 +14,7 @@ function getBasket(){
 // Ajout au panier
 function addBasket(product){ //variable product
     let basket = getBasket() // récupération du panier
-    let foundProduct = basket.find(p => p._id == product._id && p.color == colors.value) // recherche dans le panier si il y a un produit dont l'id est égal à l'id du produit que le client souhaite ajouter
+    let foundProduct = basket.find(p => p._id == product._id && p.color == product.color) // recherche dans le panier si il y a un produit dont l'id est égal à l'id du produit que le client souhaite ajouter
     if(foundProduct == undefined){ // si le produit n'est pas dans le panier
        basket.push(product) // on l'ajoute au panier
     } 

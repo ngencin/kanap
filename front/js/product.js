@@ -44,5 +44,5 @@ let productJson = fetch(`http://localhost:3000/api/products/${productID}`) // ur
         }else{
             alert('Vous devez ajouter une quantité entre 1 et 100 et une couleur') // si ce n'est pas le cas un message d'alerte s'affichera
         }
-    })
+    }) 
 }
