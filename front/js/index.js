@@ -1,3 +1,5 @@
+////// affichage des produits page d'accueil /////
+
 // API products
 function getProduct(products){ // création de la fonction qui appelle l'affichage des produits
                 
@@ -35,4 +37,9 @@ let productsJson = fetch("http://localhost:3000/api/products") // requête récu
         return res.json() // résultat requête format json
     }).then((products) => { // appel des produits
         getProduct(products) // appel de la fonction qui permet l'affichage des produits, qui permet d'éviter undefined pour les variables
-});                       
+    })      
+    .catch(function(error) { // si problème de permission un message d'erreur s'affiche
+        console.log('Il y a eu un problème avec l\'opération fetch: ' + error.message)
+    })        
+
+////// fin affichage des produits page d'accueil /////

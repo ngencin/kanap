@@ -1,8 +1,11 @@
+////// gestion panier /////
+
 // Permet de sauvegarder le panier dans le localStorage
 function saveBasket(basket){ //basket en paramètre permet de dire quel panier va être enregistré
     localStorage.setItem("basket", JSON.stringify(basket)) // objet transformer en chaine de caractères 
 
 }
+// Création du panier
 function getBasket(){
     let basket = localStorage.getItem("basket") // enregistrement dans une variable ce que l'on récupère
     if(basket == null){ // si la donnée n'existe pas dans le panier il retournera un null
@@ -23,3 +26,4 @@ function addBasket(product){ //variable product
     }
     saveBasket(basket) // sauvegarde du panier
 } 
+////// fin gestion panier /////
