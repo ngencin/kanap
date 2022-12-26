@@ -230,7 +230,7 @@ order.addEventListener('click', (event) => {
 
     ////// regex Prénom - Nom - Ville /////
     const NamesCityRegex = (value) => {
-        return /^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ._\s-]{2,20}$/.test(value)
+        return /^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ._',";\s-]{2,20}$/.test(value)
     }
 
     function firstNameOk() {
@@ -273,7 +273,7 @@ order.addEventListener('click', (event) => {
 
     ////// regex Adresse /////
     const addressRegex = (value) => {
-        return /^[a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ._\s-]{2,40}$/.test(value)
+        return /^[a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ._',";\s-]{2,40}$/.test(value)
     }
 
     function addressOk() {
