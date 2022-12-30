@@ -91,8 +91,8 @@ function basketItem(products) {
             itemQuantity.setAttribute("type", "number") // type de l'input
             itemQuantity.className = ('itemQuantity')
             itemQuantity.setAttribute("name", "itemQuantity")
-            itemQuantity.setAttribute("min", "1")
-            itemQuantity.setAttribute("max", "100")
+            itemQuantity.setAttribute("min", 1)
+            itemQuantity.setAttribute("max", 100)
             itemQuantity.setAttribute("value", `${product.quantity}`)  // valeur de la quantité entrée par l'utilisateur
             itemQuantity.addEventListener("input", (e) => totalQuantityPrice(e, products)) //écoute evenement sur l'input 
 
@@ -124,7 +124,7 @@ function basketItem(products) {
 
 
 
-// fonction qui permet de changer la quantité avec l'input
+// fonction qui permet de changer la quantité dans l'input
 function totalQuantityPrice(e, products) {
     console.log('test')
     let basket = getBasket()// appel du panier
@@ -202,88 +202,84 @@ function idsBasket() {
 ////// fin gestion panier /////
 
 
-////// Formulaire /////
+////// début formulaire /////
 
 //Bouton qui envoie le formulaire au localStorage
 const order = document.getElementById("order")
 order.addEventListener('click', (event) => {
-    // let basket = getBasket()
     event.preventDefault();
 
-
-
+    ////// validation formulaire /////
+    let inputName = document.getElementById("firstName")
+    let inputLastName = document.getElementById("lastName")
+    let inputCity = document.getElementById("city")
+    let inputAddress = document.getElementById("address")
+    let inputMail = document.getElementById("email")
+    
     // Récupération des données du formulaire
     const valuesForm = {
         contact: {
-            firstName: document.querySelector('#firstName').value,
-            lastName: document.querySelector('#lastName').value,
-            address: document.querySelector('#address').value,
-            city: document.querySelector('#city').value,
-            email: document.querySelector('#email').value
+            firstName: inputName.value,
+            lastName: inputLastName.value,
+            address: inputAddress.value,
+            city: inputCity.value,
+            email: inputMail.value
         },
         products: idsBasket() // appel de la fonction qui permet d'appeler tous les id présents dans le panier
     }
-    console.log(valuesForm)
 
-    ////// validation formulaire /////
-
-
-    ////// regex Prénom - Nom - Ville /////
-    const NamesCityRegex = (value) => {
+    ////// début regex Prénom - Nom - Ville /////
+    // regex formulaire
+    const namesCityRegex = (value) => {
         return /^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ._',";\s-]{2,20}$/.test(value)
     }
-
+     // champ prénom
     function firstNameOk() {
-        const firstNameValid = valuesForm.contact.firstName
-        if (NamesCityRegex(firstNameValid)) {
-            console.log("ok")
+        const firstNameValid = inputName.value // récupére la valeur entrée par l'utilisateur
+        if (namesCityRegex(firstNameValid)) { // si le champ est valide le message d'erreur ne s'affiche pas
+            firstNameErrorMsg.innerHTML = ''
             return true
         } else {
-            console.log("KO")
-            firstNameErrorMsg.innerHTML = 'Veuilez renseigner un prénom'
+            firstNameErrorMsg.innerHTML = 'Veuillez renseigner un prénom' // si le champ n'est pas valide un message d'erreur s'affiche
             return false
         }
     }
-
+    // champ nom
     function lastNameOk() {
-        const lastNameValid = valuesForm.contact.lastName
-        if (NamesCityRegex(lastNameValid)) {
-            console.log("ok")
+        const lastNameValid = inputLastName.value
+        if (namesCityRegex(lastNameValid)) { // si le champ est valide le message d'erreur ne s'affiche pas
+            lastNameErrorMsg.innerHTML = ''
             return true
         } else {
-            console.log("KO")
-            lastNameErrorMsg.innerHTML = 'Veuilez renseigner un nom'
+            lastNameErrorMsg.innerHTML = 'Veuillez renseigner un nom' // si le champ n'est pas valide un message d'erreur s'affiche
             return false
         }
     }
-
+    // champ ville
     function cityOk() {
-        const cityValid = valuesForm.contact.city
-        if (NamesCityRegex(cityValid)) {
-            console.log("ok")
+        const cityValid = inputCity.value
+        if (namesCityRegex(cityValid)) { // si le champ est valide le message d'erreur ne s'affiche pas
+            cityErrorMsg.innerHTML = ''
             return true
         } else {
-            console.log("KO")
-            cityErrorMsg.innerHTML = 'Veuilez renseigner une ville'
+            cityErrorMsg.innerHTML = 'Veuillez renseigner une ville' // si le champ n'est pas valide un message d'erreur s'affiche
             return false
         }
     }
     ////// fin regex Prénom - Nom - Ville /////
 
 
-    ////// regex Adresse /////
+    //// regex Adresse /////
     const addressRegex = (value) => {
         return /^[a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ._',";\s-]{2,40}$/.test(value)
     }
-
     function addressOk() {
-        const addressValid = valuesForm.contact.address
-        if (addressRegex(addressValid)) {
-            console.log("ok")
+        const addressValid = inputAddress.value
+        if (namesCityRegex(addressValid)) { // si le champ est valide le message d'erreur ne s'affiche pas
+            addressErrorMsg.innerHTML = ''
             return true
         } else {
-            console.log("KO")
-            addressErrorMsg.innerHTML = 'Veuilez renseigner une adresse'
+            addressErrorMsg.innerHTML = 'Veuillez renseigner une adresse' // si le champ n'est pas valide un message d'erreur s'affiche
             return false
         }
     }
@@ -293,27 +289,51 @@ order.addEventListener('click', (event) => {
     const emailRegex = (value) => {
         return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value)
     }
-
     function emailOk() {
-        const emailValid = valuesForm.contact.email
-        if (emailRegex(emailValid)) {
-            console.log("ok")
+        const emailValid = inputMail.value
+        if (emailRegex(emailValid)) { // si le champ est valide le message d'erreur ne s'affiche pas
+            emailErrorMsg.innerHTML = ''
             return true
         } else {
-            console.log("KO")
-            emailErrorMsg.innerHTML = 'Veuilez renseigner un email'
+            emailErrorMsg.innerHTML = 'Veuillez renseigner un mail' // si le champ n'est pas valide un message d'erreur s'affiche
             return false
         }
     }
-
     ////// fin regex Email /////
     ////// fin validation formulaire /////
 
 
-    //////serveur /////
+    ////// serveur /////
+    const firstNameIsValid = firstNameOk()
+    const lastNameIsValid = lastNameOk()
+    const cityIsValid = cityOk()
+    const addressIsValid = addressOk()
+    const emailIsValid = emailOk()
 
-    // envoie des données recupérées au serveur après validation
-    if (firstNameOk(), lastNameOk(), cityOk(), addressOk(), emailOk()) {
+    // fonction qui permet de changer l'input si il n'est pas valide
+    function formValidate() {
+        let form = event.target.closest('.cart__order__form')
+        form.firstName.addEventListener('input', () => {
+            firstNameOk()
+        })
+        form.lastName.addEventListener('input', () => {
+            lastNameOk()
+        })
+        form.city.addEventListener('input', () => {
+            cityOk()
+        })
+        form.address.addEventListener('input', () => {
+            addressOk()
+        })
+        form.email.addEventListener('input', () => {
+            emailOk()
+        })
+    }
+    formValidate()
+
+
+// envoie des données recupérées au serveur après validation
+    if (firstNameIsValid && lastNameIsValid && cityIsValid && addressIsValid && emailIsValid) { // envoi des champs valident au serveur
         fetch("http://localhost:3000/api/products/order", {
             method: "POST",
             body: JSON.stringify(valuesForm),
@@ -325,19 +345,17 @@ order.addEventListener('click', (event) => {
             .then((response) => response.json())
             .then((data) => {
                 console.log(data)
-                const orderId = data.orderId
-                window.location.href = "./confirmation.html" + "?orderId=" + orderId;
+                const orderId = data.orderId // récupération du numéro de commande
+                window.location.href = "./confirmation.html" + "?orderId=" + orderId; // reidrection à la page de confirmation
                 return console.log(data)
             })
             .catch(function (error) { // si problème de permission un message d'erreur s'affiche
                 console.log('Il y a eu un problème avec l\'opération fetch: ' + error.message)
             })
-        // localStorage.setItem("valuesForm", JSON.stringify(valuesForm)) // transformation de l'objet en chaine de caractères
-        document.querySelector('#order').setAttribute("value", "Commande validée !") // sinon on renvoi une réponse du type "Le panier est vide"
+        document.querySelector('#order').setAttribute("value", "Commande validée !") // message qui confirme que la commande est validée
     } else {
-        alert('Veuillez renseigner tous les champs')
+        alert('Veuillez renseigner tous les champs') // si les champs ne sont pas remplis un message d'erreur s'affiche
     }
-
 })
 ////// fin serveur /////
 
