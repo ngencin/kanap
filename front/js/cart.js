@@ -185,9 +185,9 @@ function removeFromBasket(e, products) {
 }
 
 //fonction qui envoie le tableau des produits au back-end
-function idsBasket() {
-    let basket = getBasket() // appel du panier
-    let resultBasket = [] // array vide
+let resultBasket = [] // array vide 
+function idsBasket() { 
+   let basket = getBasket() // appel du panier
     if (basket && basket.length > 0) { // si la longueur du panier est supérieur à 0
         for (let item of basket) {
             resultBasket.push(item.productID) // on push les produits au serveur
@@ -195,7 +195,8 @@ function idsBasket() {
     } else {
         document.querySelector('#order').setAttribute("value", "Le panier est vide !") // sinon on renvoi une réponse du type "Le panier est vide"
     }
-    return resultBasket
+    
+   return resultBasket
 }
 ////// fin gestion panier /////
 
@@ -223,7 +224,8 @@ order.addEventListener('click', (event) => {
             city: inputCity.value,
             email: inputMail.value
         },
-        products: idsBasket() // appel de la fonction qui permet d'appeler tous les id présents dans le panier
+        products: idsBasket()
+        // appel de la fonction qui permet d'appeler tous les id présents dans le panier
     }
 
     ////// début regex Prénom - Nom - Ville /////
@@ -307,6 +309,7 @@ order.addEventListener('click', (event) => {
     const cityIsValid = cityOk()
     const addressIsValid = addressOk()
     const emailIsValid = emailOk()
+    const basketValid = idsBasket()
 
     // fonction qui permet de changer l'input si il n'est pas valide
     function formValidate() {
@@ -331,7 +334,7 @@ order.addEventListener('click', (event) => {
 
 
 // envoie des données recupérées au serveur après validation
-    if (firstNameIsValid && lastNameIsValid && cityIsValid && addressIsValid && emailIsValid) { // envoi des champs valident au serveur
+    if (basketValid != 0 && firstNameIsValid && lastNameIsValid && cityIsValid && addressIsValid && emailIsValid) { // envoi des champs valident au serveur
         fetch("http://localhost:3000/api/products/order", {
             method: "POST",
             body: JSON.stringify(valuesForm),
@@ -351,9 +354,7 @@ order.addEventListener('click', (event) => {
                 console.log('Il y a eu un problème avec l\'opération fetch: ' + error.message)
             })
         document.querySelector('#order').setAttribute("value", "Commande validée !") // message qui confirme que la commande est validée
-    } else {
-        alert('Veuillez renseigner tous les champs') // si les champs ne sont pas remplis un message d'erreur s'affiche
-    }
+    } 
 })
 ////// fin serveur /////
 
