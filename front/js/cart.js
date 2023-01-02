@@ -126,7 +126,6 @@ function basketItem(products) {
 
 // fonction qui permet de changer la quantité dans l'input
 function totalQuantityPrice(e, products) {
-    console.log('test')
     let basket = getBasket()// appel du panier
     let valueQuantity = e.target.value
     let cartItem = e.target.closest('.cart__item')
@@ -142,7 +141,6 @@ function totalQuantityPrice(e, products) {
     }
     newQuantityBasket(changeQuantity) // appel de la fonction qui permet de changer la quantité total du panier
     newPriceBasket(products) // appel de la fonction qui affiche le prix total du panier à jour
-    console.log("test")
 }
 // fonction qui permet de metre à jour la quantité
 function newQuantityBasket(item) {
@@ -275,7 +273,7 @@ order.addEventListener('click', (event) => {
     }
     function addressOk() {
         const addressValid = inputAddress.value
-        if (namesCityRegex(addressValid)) { // si le champ est valide le message d'erreur ne s'affiche pas
+        if (addressRegex(addressValid)) { // si le champ est valide le message d'erreur ne s'affiche pas
             addressErrorMsg.innerHTML = ''
             return true
         } else {
